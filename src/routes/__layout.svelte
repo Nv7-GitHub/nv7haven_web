@@ -9,19 +9,21 @@
   }
 
   const structure: Record<string, Page[]> = {
-    "Fun": [{name: "Hella", path: "/hella"}],
+    "Fun": [{name: "Hella", path: "/hella"}, {name: "Names", path: "/names"}],
   };
 
-  function isActive(name: string): boolean {
+  let active = "";
+  page.subscribe((val) => {
     for (let [key, value] of Object.entries(structure)) {
       for (let val of value) {
-        if ($page.url.pathname.startsWith(val.path) && key === name) {
-          return true;
+        if ($page.url.pathname.startsWith(val.path)) {
+          active = key;
+          return;
         }
       }
     }
-    return false;
-  }
+    active = "";
+  })
 </script>
 
 <svelte:head>
@@ -49,14 +51,16 @@
           <a class="nav-link" href="https://urbandictionary.store/products/sweatshirt?defid=7227413">Bobby</a>
         </li>
 
-        {#each Object.entries(structure) as [key, values]}
-          <span class="nav-link dropdown-toggle" class:active={isActive(key)} data-bs-toggle="dropdown">{key}</span>
-          <ul class="dropdown-menu">
-            {#each values as value}
-              <li class="dropdown-item" on:click={() => {goto(value.path)}}>{value.name}</li>
-            {/each}
-          </ul>
-        {/each}
+        <li class="nav-item dropdown">
+          {#each Object.entries(structure) as [key, values]}
+            <span class="nav-link dropdown-toggle" class:active={active == key} data-bs-toggle="dropdown">{key}</span>
+            <ul class="dropdown-menu">
+              {#each values as value}
+                <li class="dropdown-item" on:click={() => {goto(value.path)}}>{value.name}</li>
+              {/each}
+            </ul>
+          {/each}
+        </li>
       </ul>
     </nav>
   </div>

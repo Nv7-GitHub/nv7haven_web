@@ -10,7 +10,7 @@
 
   async function hellaify() {
     loading = true;
-    let res = await fetch(url + "/hella/" + encodeURI(text));
+    let res = await fetch(url + "/hella/" + encodeURIComponent(text));
     output = await res.text();
     loading = false;
   }
