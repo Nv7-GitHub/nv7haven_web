@@ -9,7 +9,7 @@
   }
 
   const structure: Record<string, Page[]> = {
-    "Fun": [{name: "Hella", path: "/hella"}, {name: "Names", path: "/names"}, {name: "NameFind", path: "/namefind"}],
+    "Fun": [{name: "Hella", path: "/hella"}, {name: "Names", path: "/names"}, {name: "NameFind", path: "/namefind"}, {name: "Chess", path: "/chess"}],
   };
 
   let active = "";
