@@ -10,6 +10,7 @@
 
   const structure: Record<string, Page[]> = {
     "Fun": [{name: "Hella", path: "/hella"}, {name: "Names", path: "/names"}, {name: "NameFind", path: "/namefind"}, {name: "Chess", path: "/chess"}],
+    "Utilities": [{name: "FileHaven", path: "/filehaven"}],
   };
 
   let active = "";
@@ -51,16 +52,16 @@
           <a class="nav-link" href="https://urbandictionary.store/products/sweatshirt?defid=7227413">Bobby</a>
         </li>
 
-        <li class="nav-item dropdown">
-          {#each Object.entries(structure) as [key, values]}
+        {#each Object.entries(structure) as [key, values]}
+          <li class="nav-item dropdown">
             <span class="nav-link dropdown-toggle" class:active={active == key} data-bs-toggle="dropdown">{key}</span>
             <ul class="dropdown-menu">
               {#each values as value}
                 <li class="dropdown-item" on:click={() => {goto(value.path)}}>{value.name}</li>
               {/each}
             </ul>
-          {/each}
-        </li>
+          </li>
+        {/each}
       </ul>
     </nav>
   </div>
