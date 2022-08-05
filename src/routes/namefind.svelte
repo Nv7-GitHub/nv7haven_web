@@ -1,6 +1,6 @@
 <script lang="ts">
-import { browser } from "$app/env";
-import { url } from "$lib/consts";
+  import { url } from "$lib/consts";
+  import { onMount } from "svelte";
   let invalid = false;
   let valid = false;
   let feedback = "";
@@ -68,9 +68,7 @@ import { url } from "$lib/consts";
     }
   }
 
-  if (browser) {
-    initDb();
-  }
+  onMount(initDb);
 
   type nameCountResult = {
     Name: string,

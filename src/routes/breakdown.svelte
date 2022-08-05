@@ -44,4 +44,4 @@
   </table>
 {/if}
 
-<LoadingButton text="BreakDown" style={"btn-primary" + (results.length == 0 ? " mt-3" : "")} loading={loading} on:click={getResults}></LoadingButton>
+<LoadingButton style={"btn-primary" + (results.length == 0 ? " mt-3" : "")} loading={loading} on:click={getResults}>BreakDown</LoadingButton>

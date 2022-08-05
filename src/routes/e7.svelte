@@ -1,6 +1,7 @@
 <script lang="ts">
   import Spinner from "$lib/components/Spinner.svelte";
   import { url } from "$lib/consts";
+  import { onMount } from "svelte";
 
   let loading = false;
   let ascending = false;
@@ -28,7 +29,7 @@
     loading = false;
   }
 
-  load();
+  onMount(load);
 </script>
 
 <h1>Nv7's Elemental Leaderboard</h1>

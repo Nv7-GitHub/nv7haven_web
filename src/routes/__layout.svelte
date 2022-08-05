@@ -11,11 +11,11 @@
   const structure: Record<string, Page[]> = {
     "Fun": [{name: "Hella", path: "/hella"}, {name: "Names", path: "/names"}, {name: "NameFind", path: "/namefind"}, {name: "Chess", path: "/chess"}],
     "Utilities": [{name: "FileHaven", path: "/filehaven"}, {name: "QwikNotes", path: "/notes"}, {name: "BreakDown", path: "/breakdown"}],
-    "Social": [{name: "Elem7", path: "/e7"}],
+    "Social": [{name: "Elem7", path: "/e7"}, {name: "EoD", path: "/eod"}],
   };
 
   let active = "";
-  page.subscribe((val) => {
+  page.subscribe(() => {
     for (let [key, value] of Object.entries(structure)) {
       for (let val of value) {
         if ($page.url.pathname.startsWith(val.path)) {

@@ -30,5 +30,5 @@
     {/if}
   </div>
 
-  <LoadingButton type="submit" on:click={hellaify} style="btn-primary" loading={loading} text="Hella-ify!"></LoadingButton>
+  <LoadingButton type="submit" on:click={hellaify} style="btn-primary" loading={loading}>Hella-ify!</LoadingButton>
 </form>
