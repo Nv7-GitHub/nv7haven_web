@@ -15,6 +15,7 @@
     loading = true;
     let res = await fetch(url + "/breakdown/" + encodeURIComponent(input));
     results = await res.json();
+    input = "";
     loading = false;
   }
 </script>
