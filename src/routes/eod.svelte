@@ -27,6 +27,7 @@
   let general: HTMLCanvasElement;
   let users: HTMLCanvasElement;
   let found: HTMLCanvasElement;
+  let cmds: HTMLCanvasElement;
 
   onMount(() => {
     console.log("mount");
@@ -39,6 +40,7 @@
   })
 
   function draw() {
+    // General
     let elemcnt = [
       {
         label: "Element Count",
@@ -71,6 +73,7 @@
       }
     });
 
+    // Users
     let usercnt = [
       {
         label: "User Count",
@@ -96,6 +99,7 @@
       }
     });
 
+    // Found
     let foundcnt = [
       {
         label: "Found",
@@ -113,6 +117,51 @@
         datasets: foundcnt,
       }
     });
+
+    // Commands
+    let cmdsDat = [];
+    let cmdLabels = Object.keys(data.commandcounts[data.commandcounts.length-1].counts);
+    let colors = [
+      'rgba(255, 99, 132, 1)',
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(75, 192, 192, 1)',
+      'rgba(153, 102, 255, 1)',
+      'rgba(255, 159, 64, 1)'
+    ]
+
+    for (var label of cmdLabels) {
+      let items: number[] = [];
+      for (let pt of data.commandcounts) {
+        if (pt.counts[label]) {
+          items.push(pt.counts[label]);
+        } else {
+          if (items.length > 0) {
+            items.push(items[items.length-1]);
+          } else {
+            items.push(0);
+          }
+        }
+      }
+      cmdsDat.push({
+        label: label,
+        data: items,
+        fill: false,
+        borderColor: colors[cmdsDat.length % colors.length],
+      });
+    }
+    let labels = data.commandcounts.map(pt => pt.timestring);
+    cmdsDat.sort((a, b) => {
+      return b.data[b.data.length-1] - a.data[a.data.length-1];
+    })
+
+    new Chart(cmds, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: cmdsDat,
+      }
+    });
   }
 </script>
 
@@ -128,9 +177,13 @@
 
 <h2>User Statistics</h2>
 <p class="lead">Statistics on user count and server count.</p>
-<canvas bind:this={users} id="usercnt" style="width: 75vw; height: 30vw;"></canvas>
+<canvas bind:this={users} style="width: 75vw; height: 30vw;"></canvas>
 
 <h2>Elements Found</h2>
 <p class="lead">The number of elements found, across all servers and users.</p>
-<canvas bind:this={found} id="found" style="width: 75vw; height: 30vw;"></canvas>
+<canvas bind:this={found} style="width: 75vw; height: 30vw;"></canvas>
+
+<h2>Commands Used</h2>
+<p class="lead">The number of each command used, across all servers.</p>
+<canvas bind:this={cmds} style="width: 75vw; height: 30vw;"></canvas>
 {/if}
