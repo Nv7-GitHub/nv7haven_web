@@ -5,7 +5,7 @@
 
   export let style: string;
   export let type = "button";
-  export let loading = false;
+  export let loading: boolean;
   export let disabled = false;
 
   function click() {

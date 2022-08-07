@@ -3,7 +3,7 @@
   import { url } from "$lib/consts";
   import { onMount } from "svelte";
 
-  let loading = false;
+  let loading = true;
   let ascending = false;
   let page = 0;
   enum Mode {
@@ -23,7 +23,6 @@
   let result: Result;
 
   async function load() {
-    loading = true;
     let res = await fetch(url + "/ldb_query/" + (ascending ? "1" : "0" + "/") + mode + "/" + page);
     result = await res.json();
     loading = false;
