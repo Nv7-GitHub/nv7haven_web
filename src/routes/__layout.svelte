@@ -55,10 +55,12 @@
 
         {#each Object.entries(structure) as [key, values]}
           <li class="nav-item dropdown">
-            <span class="nav-link dropdown-toggle" class:active={active == key} data-bs-toggle="dropdown">{key}</span>
+            <span class="nav-link dropdown-toggle cursor" class:active={active == key} data-bs-toggle="dropdown">{key}</span>
             <ul class="dropdown-menu">
               {#each values as value}
-                <li class="dropdown-item" on:click={() => {goto(value.path)}}>{value.name}</li>
+                <li class="dropdown-item cursor" on:click={() => {goto(value.path)}}>
+                  {value.name}
+                </li>
               {/each}
             </ul>
           </li>
@@ -71,3 +73,9 @@
 <div class="container text-center mt-3">
   <slot></slot>
 </div>
+
+<style>
+  .cursor {
+    cursor: pointer;
+  }
+</style>
