@@ -7,10 +7,10 @@
   let words = wordsRaw.split("\n");
   let ready = false;
 
-  let first = "xie";
-  let second = "mcn";
-  let third = "ouy";
-  let fourth = "lqr";
+  let first = "bzk";
+  let second = "tqi";
+  let third = "sul";
+  let fourth = "are";
 
   let res: string[] = [];
   let solving = false;
