@@ -12,6 +12,7 @@
     "Fun": [{name: "Hella", path: "/hella"}, {name: "Names", path: "/names"}, {name: "NameFind", path: "/namefind"}, {name: "Chess", path: "/chess"}],
     "Utilities": [{name: "FileHaven", path: "/filehaven"}, {name: "QwikNotes", path: "/notes"}, {name: "BreakDown", path: "/breakdown"}],
     "Social": [{name: "BestEver", path: "/bestever"}, {name: "Elem7", path: "/e7"}, {name: "EoD", path: "/eod"}],
+    "Puzzles": [{name: "LetterBoxed", path: "/letterboxed"}],
   };
 
   let active = "";
