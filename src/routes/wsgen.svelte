@@ -1,12 +1,72 @@
 <script lang="ts">
+  const CHARS = "abcdefghijklmnopqrstuvwxyz";
+
   let val = "";
+  $: {
+    val = val.toLowerCase()
+  }
   let items: string[] = [];
 
   let width: number;
   let height: number;
+  let output = "";
+
+  let copied = false;
+
+  function duplBoard(board: string[][]): string[][] {
+    return [...board].map(v => [...v]);
+  }
 
   function generate() {
-    console.log("TODO")
+    let board = Array.from({length: height}, () => new Array(width).fill(""));
+
+    // Put in words
+    for (let word of items) {
+      let finished = false;
+      while (!finished) {
+        // Calculate random vals
+        let startx = Math.floor(Math.random() * width);
+        let starty = Math.floor(Math.random() * height);
+        let offx = Math.floor(Math.random() * 2) - 1;
+        let offy = Math.floor(Math.random() * 2) - 1;
+        if (offx == 0 && offy == 0) {continue;} // No offset
+        let cop = duplBoard(board);
+
+        let fail = false;
+        for (let [i, lett] of Array.from(word).entries()) {
+          // Calculate indexes
+          let rv = starty + (offy * i);
+          let cv = startx + (offx * i);
+          if (rv < 0 || rv >= height || cv < 0 || cv >= width) { // Out of bounds
+            fail = true;
+            break;
+          }
+          if (board[rv][cv] != "") { // Intersects with other word
+            fail = true;
+            break;
+          }
+          cop[rv][cv] = lett;
+        }
+
+        if (!fail) {
+          finished = true;
+          board = cop;
+        }
+      }
+    }
+
+    // Put in random chars
+    for (let [r, row] of board.entries()) {
+      for (let [c, col] of row.entries()) {
+        if (col == "") {
+          board[r][c] = CHARS[Math.floor(Math.random() * CHARS.length)];
+        }
+      }
+    }
+
+    // Save
+    output = board.map(v => v.join("")).join("\n");
+    copied = false;
   }
 </script>
 
@@ -29,7 +89,7 @@
   {/each}
 </ul>
 
-<form class="input-group">
+<form class="input-group mb-5">
   <div class="form-floating">
     <input type="number" id="width" bind:value={width} class="form-control" placeholder="Width..."/>
     <label for="width">Width</label>
@@ -40,3 +100,9 @@
   </div>
   <button type="submit" class="btn btn-primary" on:click|preventDefault={generate}>Generate!</button>
 </form>
+
+{#if output != ""}
+  <textarea class="form-control" readonly rows={output.length - output.replaceAll("\n", "").length + 1}>{output}</textarea>
+
+  <button class="btn btn-success mt-3 mb-5" on:click={async () => {await navigator.clipboard.writeText(output); copied = true;}}><i class="bi" class:bi-clipboard={!copied} class:bi-clipboard-check={copied}></i> {copied ? "Copied!" : "Copy"}</button>
+{/if}
