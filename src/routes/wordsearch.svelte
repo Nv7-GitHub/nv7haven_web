@@ -102,7 +102,7 @@ cbslmqxtrla`;
 </div>
 {/if}
 
-<input type="text" class="form-control" bind:value={query} placeholder="Word to find..."/>
+<input type="search" class="form-control" bind:value={query} placeholder="Word to find..."/>
 
 <div class="table-responsive">
   <table class="table" vg-if="c.BoardCalculated">
@@ -118,5 +118,5 @@ cbslmqxtrla`;
   </table>
 </div>
 
-<button class="btn btn-danger" on:click={() => {board = [];}}>Reset</button>
+<button class="btn btn-danger mb-5" on:click={() => {board = [];}}>Reset</button>
 {/if}
