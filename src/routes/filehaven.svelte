@@ -52,7 +52,7 @@ import { url } from "$lib/consts";
 </div>
 
 {#if loading}
-  <div class="progress" vg-if="c.Loading">
+  <div class="progress">
     <div class="progress-bar progress-bar-striped progress-bar-animated" style={"width: " + percent + "%"}></div>
   </div>
 {/if}

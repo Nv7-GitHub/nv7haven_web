@@ -30,7 +30,6 @@
   let cmds: HTMLCanvasElement;
 
   onMount(() => {
-    console.log("mount");
     fetch(url + "/eod_stats").then(async (val) => {
       data = await val.json();
       loading = false;

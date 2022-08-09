@@ -160,7 +160,7 @@
   <tbody>
     {#each rows as row, i}
     <tr>
-      <th scope="row" vg-content="i+1">{i+1}</th>
+      <th scope="row">{i+1}</th>
       <td>{row.name}</td>
       <td>{row.count.toLocaleString()}</td>
     </tr>
