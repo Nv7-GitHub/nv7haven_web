@@ -53,7 +53,7 @@
 {#if res.length > 0}
 <h2 class="mt-3">Output</h2>
 <ul class="list-group">
-{#each res as v}
+{#each res as v (v)}
   <li class="list-group-item d-flex justify-content-between">
     <div class="p-0 m-0 flex-grow-1" style="transform: translateY(20%);">{v}</div> 
     <button class="btn btn-danger" on:click={() => {remove(v)}} disabled={solving}>
