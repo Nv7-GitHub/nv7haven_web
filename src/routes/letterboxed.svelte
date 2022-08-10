@@ -1,10 +1,9 @@
 <script lang="ts">
-  import wordsRaw from "$lib/assets/words.txt?raw";
   import Spinner from "$lib/components/Spinner.svelte";
   import { load, solve } from "$lib/letterboxed/letterboxed";
   import { onMount, tick } from "svelte";
 
-  let words = wordsRaw.split("\n");
+  let words: string[] = [];
   let ready = false;
 
   let first = "bzk";
@@ -16,6 +15,9 @@
   let solving = false;
 
   async function getReady() {
+    let res = await fetch("/letterboxed/words.txt");
+    let text = await res.text();
+    words = text.split("\n");
     await load(); // Load WASM
     ready = true;
   }
