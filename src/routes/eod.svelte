@@ -1,8 +1,9 @@
 <script lang="ts">
   import Spinner from "$lib/components/Spinner.svelte";
   import { url } from "$lib/consts";
-  import Chart from "chart.js/auto";
   import { onMount, tick } from "svelte";
+
+  import Chart from "chart.js/auto/auto.mjs";
 
   let loading = true;
 
