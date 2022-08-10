@@ -1,0 +1,12 @@
+{
+  "name": "letterboxed_wasm",
+  "version": "0.1.0",
+  "files": [
+    "letterboxed_wasm_bg.wasm",
+    "letterboxed_wasm.js",
+    "letterboxed_wasm.d.ts"
+  ],
+  "module": "letterboxed_wasm.js",
+  "types": "letterboxed_wasm.d.ts",
+  "sideEffects": false
+}
