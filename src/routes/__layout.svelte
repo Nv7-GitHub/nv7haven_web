@@ -13,6 +13,7 @@
     "Utilities": [{name: "FileHaven", path: "/filehaven"}, {name: "QwikNotes", path: "/notes"}, {name: "BreakDown", path: "/breakdown"}],
     "Social": [{name: "BestEver", path: "/bestever"}, {name: "Elem7", path: "/e7"}, {name: "EoD", path: "/eod"}],
     "Puzzles": [{name: "LetterBoxed", path: "/letterboxed"}, {name: "WordSearch", path: "/wordsearch"}, {name: "WSGen", path: "/wsgen"}],
+    "Dev": [{name: "B#", path: "/bsp"}],
   };
 
   let active = "";
