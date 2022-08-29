@@ -3,7 +3,7 @@
   import Spinner from "$lib/components/Spinner.svelte";
   import { url } from "$lib/consts";
   import { onMount, onDestroy } from "svelte";
-  import { count } from "./data";
+  import { count } from "../data";
 
   let ready = false;
   let items: string[] = [];

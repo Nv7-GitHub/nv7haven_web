@@ -2,7 +2,7 @@
   import { goto } from "$app/navigation";
   import LoadingButton from "$lib/components/LoadingButton.svelte";
   import { url } from "$lib/consts";
-  import { passwordStore } from "./password";
+  import { passwordStore } from "../password";
 
   let name = "";
   let password = "";

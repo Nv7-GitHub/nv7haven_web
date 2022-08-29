@@ -5,7 +5,7 @@ import { goto } from "$app/navigation";
   import LoadingButton from "$lib/components/LoadingButton.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
   import { url } from "$lib/consts";
-  import { passwordStore } from "./password";
+  import { passwordStore } from "../password";
 
   let name = decodeURIComponent($page.params["name"]);
   let text = "";
