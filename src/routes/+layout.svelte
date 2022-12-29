@@ -2,6 +2,7 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/stores";
   import logo from "$lib/assets/navbar.svg";
+    import { onMount } from "svelte";
 
   type Page = {
     name: string,
@@ -15,6 +16,53 @@
     "Puzzles": [{name: "LetterBoxed", path: "/letterboxed"}, {name: "WordSearch", path: "/wordsearch"}, {name: "WSGen", path: "/wsgen"}],
     "Dev": [{name: "B#", path: "/bsp"}],
   };
+
+  // Theme
+  /*enum Theme {
+    LIGHT = "light",
+    DARK = "dark",
+    AUTO = "auto",
+  }*/
+
+  const themes = ["light", "dark", "auto"];
+  const themeIcons: Record<string, string> = {
+    "light": "brightness-high-fill",
+    "dark": "moon-stars-fill",
+    "auto": "circle-half",
+  }
+
+  let theme = "auto";
+
+  function switchTheme(newTheme: string) {
+    theme = newTheme;
+    localStorage.setItem("theme", newTheme);
+    updateColorMode();
+  }
+
+  function updateColorMode() {
+    switch (theme) {
+      case "light":
+        document.documentElement.setAttribute("data-bs-theme", "light");
+        break;
+
+      case "dark":
+        document.documentElement.setAttribute("data-bs-theme", "dark");
+        break;
+
+      case "auto":
+        document.documentElement.setAttribute("data-bs-theme", window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
+        break;
+    }
+  }
+
+  // Auto theme
+  onMount(() => {
+    theme = localStorage.getItem("theme") ?? "auto";
+    updateColorMode();
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      updateColorMode();
+    })
+  })
 
   let active = "";
   page.subscribe(() => {
@@ -67,6 +115,17 @@
             </ul>
           </li>
         {/each}
+
+        <li class="nav-item dropdown">
+          <span class="nav-link dropdown-toggle cursor" data-bs-toggle="dropdown"><i class={"bi bi-" + themeIcons[theme]}></i></span>
+          <ul class="dropdown-menu">
+            {#each themes as t}
+              <li class="dropdown-item cursor" on:click={() => {switchTheme(t)}}>
+                <i class={"bi bi-" + themeIcons[t]}></i> <span class="capitalize">{t}</span>
+              </li>
+            {/each}
+          </ul>
+        </li>
       </ul>
     </nav>
   </div>
@@ -79,5 +138,9 @@
 <style>
   .cursor {
     cursor: pointer;
+  }
+
+  .capitalize {
+    text-transform: capitalize;
   }
 </style>
