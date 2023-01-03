@@ -106,7 +106,7 @@
         {#each Object.entries(structure) as [key, values]}
           <li class="nav-item dropdown">
             <span class="nav-link dropdown-toggle cursor" class:active={active == key} data-bs-toggle="dropdown">{key}</span>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-end">
               {#each values as value}
                 <li class="dropdown-item cursor" on:click={() => {goto(value.path)}}>
                   {value.name}
@@ -118,7 +118,7 @@
 
         <li class="nav-item dropdown">
           <span class="nav-link dropdown-toggle cursor" data-bs-toggle="dropdown"><i class={"bi bi-" + themeIcons[theme]}></i></span>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu dropdown-menu-end">
             {#each themes as t}
               <li class="dropdown-item cursor" on:click={() => {switchTheme(t)}}>
                 <i class={"bi bi-" + themeIcons[t]}></i> <span class="capitalize">{t}</span>
