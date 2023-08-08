@@ -12,6 +12,7 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
+		"@types/papaparse": "^5.3.7",
 		"svelte": "^3.44.0",
 		"svelte-check": "^2.7.1",
 		"svelte-preprocess": "^4.10.6",
@@ -21,6 +22,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"chart.js": "^3.9.1"
+		"chart.js": "^4.3.3",
+		"papaparse": "^5.4.1"
 	}
 }

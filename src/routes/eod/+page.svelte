@@ -2,27 +2,26 @@
   import Spinner from "$lib/components/Spinner.svelte";
   import { url } from "$lib/consts";
   import { onMount, tick } from "svelte";
-
-  import Chart from "chart.js/auto/auto.mjs";
+  import Chart from "chart.js/auto";
 
   let loading = true;
 
   type CmdCount = {
-    time: number,
-    timestring: string,
-    counts: Record<string, number>,
-  }
+    time: number;
+    timestring: string;
+    counts: Record<string, number>;
+  };
 
   type Data = {
-    labels: string[],
-    found: number[],
-    elemcnt: number[],
-    categorized: number[],
-    combcnt: number[],
-    usercnt: number[],
-    servercnt: number[],
-    commandcounts: CmdCount[],
-  }
+    labels: string[];
+    found: number[];
+    elemcnt: number[];
+    categorized: number[];
+    combcnt: number[];
+    usercnt: number[];
+    servercnt: number[];
+    commandcounts: CmdCount[];
+  };
 
   let data: Data;
   let general: HTMLCanvasElement;
@@ -36,8 +35,8 @@
       loading = false;
       await tick();
       draw();
-    }) 
-  })
+    });
+  });
 
   function draw() {
     // General
@@ -62,7 +61,7 @@
         fill: true,
         borderColor: "rgba(75, 192, 192, 1)",
         backgroundColor: "rgba(75, 192, 192, 0.2)",
-      }
+      },
     ];
 
     new Chart(general, {
@@ -70,7 +69,7 @@
       data: {
         labels: data.labels,
         datasets: elemcnt,
-      }
+      },
     });
 
     // Users
@@ -88,7 +87,7 @@
         fill: true,
         borderColor: "rgba(255, 159, 64, 1)",
         backgroundColor: "rgba(255, 159, 64, 0.2)",
-      }
+      },
     ];
 
     new Chart(users, {
@@ -96,7 +95,7 @@
       data: {
         labels: data.labels,
         datasets: usercnt,
-      }
+      },
     });
 
     // Found
@@ -107,7 +106,7 @@
         fill: true,
         borderColor: "rgba(255, 99, 132, 1)",
         backgroundColor: "rgba(255, 99, 132, 0.2)",
-      }
+      },
     ];
 
     new Chart(found, {
@@ -115,20 +114,22 @@
       data: {
         labels: data.labels,
         datasets: foundcnt,
-      }
+      },
     });
 
     // Commands
     let cmdsDat = [];
-    let cmdLabels = Object.keys(data.commandcounts[data.commandcounts.length-1].counts);
+    let cmdLabels = Object.keys(
+      data.commandcounts[data.commandcounts.length - 1].counts
+    );
     let colors = [
-      'rgba(255, 99, 132, 1)',
-      'rgba(54, 162, 235, 1)',
-      'rgba(255, 206, 86, 1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgba(255, 159, 64, 1)'
-    ]
+      "rgba(255, 99, 132, 1)",
+      "rgba(54, 162, 235, 1)",
+      "rgba(255, 206, 86, 1)",
+      "rgba(75, 192, 192, 1)",
+      "rgba(153, 102, 255, 1)",
+      "rgba(255, 159, 64, 1)",
+    ];
 
     for (var label of cmdLabels) {
       let items: number[] = [];
@@ -137,7 +138,7 @@
           items.push(pt.counts[label]);
         } else {
           if (items.length > 0) {
-            items.push(items[items.length-1]);
+            items.push(items[items.length - 1]);
           } else {
             items.push(0);
           }
@@ -150,40 +151,49 @@
         borderColor: colors[cmdsDat.length % colors.length],
       });
     }
-    let labels = data.commandcounts.map(pt => pt.timestring);
+    let labels = data.commandcounts.map((pt) => pt.timestring);
     cmdsDat.sort((a, b) => {
-      return b.data[b.data.length-1] - a.data[a.data.length-1];
-    })
+      return b.data[b.data.length - 1] - a.data[a.data.length - 1];
+    });
 
     new Chart(cmds, {
       type: "line",
       data: {
         labels: labels,
         datasets: cmdsDat,
-      }
+      },
     });
   }
 </script>
 
 <h1>EoD Statistics</h1>
-<p class="lead">Check out EoD statistics! Learn more about EoD <a href="https://discord.gg/KPmbJmNtxQ">here</a>!</p>
+<p class="lead">
+  Check out EoD statistics! Learn more about EoD <a
+    href="https://discord.gg/KPmbJmNtxQ">here</a
+  >!
+</p>
 
-{#if loading} 
-<Spinner></Spinner>
+{#if loading}
+  <Spinner />
 {:else}
-<h2>General Statistics</h2>
-<p class="lead">Statistics on element count, combination count, and categorized element count.</p>
-<canvas bind:this={general} style="width: 75vw; height: 30vw;"></canvas>
+  <h2>General Statistics</h2>
+  <p class="lead">
+    Statistics on element count, combination count, and categorized element
+    count.
+  </p>
+  <canvas bind:this={general} style="width: 75vw; height: 30vw;" />
 
-<h2>User Statistics</h2>
-<p class="lead">Statistics on user count and server count.</p>
-<canvas bind:this={users} style="width: 75vw; height: 30vw;"></canvas>
+  <h2>User Statistics</h2>
+  <p class="lead">Statistics on user count and server count.</p>
+  <canvas bind:this={users} style="width: 75vw; height: 30vw;" />
 
-<h2>Elements Found</h2>
-<p class="lead">The number of elements found, across all servers and users.</p>
-<canvas bind:this={found} style="width: 75vw; height: 30vw;"></canvas>
+  <h2>Elements Found</h2>
+  <p class="lead">
+    The number of elements found, across all servers and users.
+  </p>
+  <canvas bind:this={found} style="width: 75vw; height: 30vw;" />
 
-<h2>Commands Used</h2>
-<p class="lead">The number of each command used, across all servers.</p>
-<canvas bind:this={cmds} style="width: 75vw; height: 30vw;"></canvas>
+  <h2>Commands Used</h2>
+  <p class="lead">The number of each command used, across all servers.</p>
+  <canvas bind:this={cmds} style="width: 75vw; height: 30vw;" />
 {/if}
