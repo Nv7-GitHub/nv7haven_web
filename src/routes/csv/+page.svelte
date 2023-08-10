@@ -60,6 +60,7 @@
             radius: 0, // default to disabled in all datasets
           },
         },
+        animation: false,
       },
       data: {
         labels,
