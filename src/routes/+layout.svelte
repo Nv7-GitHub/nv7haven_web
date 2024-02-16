@@ -21,6 +21,8 @@
       { name: "QwikNotes", path: "/notes" },
       { name: "BreakDown", path: "/breakdown" },
       { name: "CSV", path: "/csv" },
+      { name: "Studier", path: "https://studier.nv7haven.com" },
+      { name: "When3meet", path: "https://w3m.evang.dev" },
     ],
     Social: [
       { name: "BestEver", path: "/bestever" },
@@ -72,7 +74,7 @@
           "data-bs-theme",
           window.matchMedia("(prefers-color-scheme: dark)").matches
             ? "dark"
-            : "light"
+            : "light",
         );
         break;
     }
@@ -159,14 +161,9 @@
             >
             <ul class="dropdown-menu dropdown-menu-end">
               {#each values as value}
-                <li
-                  class="dropdown-item cursor"
-                  on:click={() => {
-                    goto(value.path);
-                  }}
-                >
+                <a class="dropdown-item cursor" href={value.path}>
                   {value.name}
-                </li>
+                </a>
               {/each}
             </ul>
           </li>
