@@ -66,6 +66,14 @@
 
     new Chart(general, {
       type: "line",
+      options: {
+        responsive: true,
+        elements: {
+          point: {
+            radius: 0, // default to disabled in all datasets
+          },
+        },
+      },
       data: {
         labels: data.labels,
         datasets: elemcnt,
@@ -92,6 +100,14 @@
 
     new Chart(users, {
       type: "line",
+      options: {
+        responsive: true,
+        elements: {
+          point: {
+            radius: 0, // default to disabled in all datasets
+          },
+        },
+      },
       data: {
         labels: data.labels,
         datasets: usercnt,
@@ -111,6 +127,14 @@
 
     new Chart(found, {
       type: "line",
+      options: {
+        responsive: true,
+        elements: {
+          point: {
+            radius: 0, // default to disabled in all datasets
+          },
+        },
+      },
       data: {
         labels: data.labels,
         datasets: foundcnt,
@@ -120,7 +144,7 @@
     // Commands
     let cmdsDat = [];
     let cmdLabels = Object.keys(
-      data.commandcounts[data.commandcounts.length - 1].counts
+      data.commandcounts[data.commandcounts.length - 1].counts,
     );
     let colors = [
       "rgba(255, 99, 132, 1)",
@@ -158,6 +182,14 @@
 
     new Chart(cmds, {
       type: "line",
+      options: {
+        responsive: true,
+        elements: {
+          point: {
+            radius: 0, // default to disabled in all datasets
+          },
+        },
+      },
       data: {
         labels: labels,
         datasets: cmdsDat,
