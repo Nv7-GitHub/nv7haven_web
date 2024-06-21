@@ -3,6 +3,7 @@
   import { url } from "$lib/consts";
   import { onMount, tick } from "svelte";
   import Chart from "chart.js/auto";
+  import "chartjs-adapter-date-fns";
 
   let loading = true;
 
@@ -73,6 +74,11 @@
             radius: 0, // default to disabled in all datasets
           },
         },
+        scales: {
+          x: {
+            type: "time",
+          },
+        },
       },
       data: {
         labels: data.labels,
@@ -107,6 +113,11 @@
             radius: 0, // default to disabled in all datasets
           },
         },
+        scales: {
+          x: {
+            type: "time",
+          },
+        },
       },
       data: {
         labels: data.labels,
@@ -132,6 +143,11 @@
         elements: {
           point: {
             radius: 0, // default to disabled in all datasets
+          },
+        },
+        scales: {
+          x: {
+            type: "time",
           },
         },
       },
@@ -187,6 +203,11 @@
         elements: {
           point: {
             radius: 0, // default to disabled in all datasets
+          },
+        },
+        scales: {
+          x: {
+            type: "time",
           },
         },
       },

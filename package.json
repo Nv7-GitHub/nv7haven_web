@@ -22,6 +22,8 @@
 	"type": "module",
 	"dependencies": {
 		"chart.js": "^4.4.1",
+		"chartjs-adapter-date-fns": "^3.0.0",
+		"date-fns": "^3.6.0",
 		"papaparse": "^5.4.1"
 	}
 }
