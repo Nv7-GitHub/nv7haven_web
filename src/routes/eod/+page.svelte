@@ -219,9 +219,9 @@
   }
 </script>
 
-<h1>EoD Statistics</h1>
+<h1>EoD Everywhere Statistics</h1>
 <p class="lead">
-  Check out EoD statistics! Learn more about EoD <a
+  Check out EoD Everywhere statistics! Learn more about EoD Everywhere <a
     href="https://discord.gg/KPmbJmNtxQ">here</a
   >!
 </p>
