@@ -34,7 +34,10 @@
       { name: "WordSearch", path: "/wordsearch" },
       { name: "WSGen", path: "/wsgen" },
     ],
-    Dev: [{ name: "B#", path: "/bsp" }],
+    Dev: [
+      { name: "B#", path: "/bsp" },
+      { name: "CPU", path: "/cpu" },
+    ],
   };
 
   // Theme
